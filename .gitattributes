@@ -1,0 +1,3 @@
+# Store text with LF endings so diffs are clean across Windows and Linux.
+* text=auto eol=lf
+*.png binary

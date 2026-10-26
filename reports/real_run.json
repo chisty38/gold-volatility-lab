@@ -1,0 +1,133 @@
+{
+  "config": {
+    "symbol": "GC=F",
+    "min_train_sessions": 8,
+    "validation_sessions": 3,
+    "alphas": [
+      0.01,
+      0.1,
+      1.0,
+      10.0,
+      100.0
+    ],
+    "feature_sets": {
+      "lags": [
+        "vol_now",
+        "vol_lag_1h",
+        "vol_lag_2h"
+      ],
+      "har_avg": [
+        "vol_now",
+        "avg_6_hourly",
+        "avg_24_hourly"
+      ],
+      "har_direct": [
+        "vol_now",
+        "rv_6h",
+        "rv_24h"
+      ],
+      "seasonal": [
+        "vol_now",
+        "seasonal_5d"
+      ],
+      "har_seasonal": [
+        "vol_now",
+        "avg_24_hourly",
+        "seasonal_5d"
+      ]
+    },
+    "targets": [
+      "original",
+      "log"
+    ],
+    "log_floor": 1e-08,
+    "baselines": {
+      "previous_hour": "vol_now",
+      "avg_3_hourly": "avg_3_hourly",
+      "same_hour_5d": "seasonal_5d"
+    },
+    "bootstrap_block": 23,
+    "bootstrap_samples": 2000,
+    "bootstrap_seed": 0
+  },
+  "data": {
+    "cache_sha256": "2b9ad92d9b953d39d9211a27f9c8a6d941805e243aff6ce5af50d73ca8247014",
+    "first_example": "2026-10-01 23:00:00+00:00",
+    "last_example": "2026-10-23 20:00:00+00:00",
+    "examples": 345,
+    "latest_price": 4011.199951171875,
+    "test_sessions": [
+      "2026-10-14",
+      "2026-10-15",
+      "2026-10-16",
+      "2026-10-19",
+      "2026-10-20",
+      "2026-10-21",
+      "2026-10-22",
+      "2026-10-23"
+    ],
+    "out_of_sample_forecasts": 173
+  },
+  "chosen_settings": {
+    "ridge[seasonal, original, alpha=10.0]": 2,
+    "ridge[seasonal, log, alpha=0.01]": 1,
+    "ridge[seasonal, original, alpha=0.01]": 1,
+    "ridge[har_seasonal, log, alpha=10.0]": 1,
+    "ridge[seasonal, log, alpha=10.0]": 1,
+    "ridge[har_seasonal, log, alpha=100.0]": 1,
+    "ridge[har_seasonal, original, alpha=10.0]": 1
+  },
+  "summary": [
+    {
+      "method": "chosen",
+      "forecasts": 173,
+      "mae_pp": 0.052001480039832376,
+      "worst_pp": 0.5561331760850666,
+      "mae_usd": 2.0858833419664085,
+      "vs_previous_hour_pp": -0.0191526207949948,
+      "ci_low_pp": -0.022619738477590825,
+      "ci_high_pp": -0.01258121551111924,
+      "sessions_won": 8.0
+    },
+    {
+      "method": "previous_hour",
+      "forecasts": 173,
+      "mae_pp": 0.07115410083482718,
+      "worst_pp": 0.6511566689467722,
+      "mae_usd": 2.8541332579433742,
+      "vs_previous_hour_pp": 0.0,
+      "ci_low_pp": 0.0,
+      "ci_high_pp": 0.0,
+      "sessions_won": 0.0
+    },
+    {
+      "method": "avg_3_hourly",
+      "forecasts": 173,
+      "mae_pp": 0.07984166824981159,
+      "worst_pp": 0.6852945939684352,
+      "mae_usd": 3.202608957851253,
+      "vs_previous_hour_pp": 0.008687567414984413,
+      "ci_low_pp": -0.0015055141082569946,
+      "ci_high_pp": 0.016491506724334564,
+      "sessions_won": 1.0
+    },
+    {
+      "method": "same_hour_5d",
+      "forecasts": 173,
+      "mae_pp": 0.05607289474742672,
+      "worst_pp": 0.4608920220609755,
+      "mae_usd": 2.2491959267294375,
+      "vs_previous_hour_pp": -0.01508120608740045,
+      "ci_low_pp": -0.020433191717278764,
+      "ci_high_pp": -0.003800723307516433,
+      "sessions_won": 7.0
+    }
+  ],
+  "versions": {
+    "gold_volatility": "0.1.0",
+    "python": "3.14.3",
+    "numpy": "2.5.4",
+    "pandas": "3.0.6",
+    "scikit-learn": "1.9.1"
+  }
+}

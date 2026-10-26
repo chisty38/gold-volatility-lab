@@ -1,0 +1,65 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gold-volatility-lab"
+version = "0.1.0"
+description = "Leak-free, walk-forward forecasting of next-hour gold futures volatility."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Mainul Haque" }]
+requires-python = ">=3.14"
+# Minimum versions; requirements.txt pins the exact versions behind the
+# published results.
+dependencies = [
+    "matplotlib>=3.11",
+    "numpy>=2.5",
+    "pandas>=3.0",
+    "scikit-learn>=1.9",
+]
+keywords = ["volatility", "forecasting", "gold", "time-series", "walk-forward"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Office/Business :: Financial :: Investment",
+]
+
+[project.urls]
+Repository = "https://github.com/chisty38/gold-volatility-lab"
+
+[project.scripts]
+gold-vol = "gold_volatility.cli:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--strict-markers"
+
+[tool.coverage.run]
+source = ["gold_volatility"]
+# The download needs the network; tests replace it with simulated bars.
+omit = ["*/__main__.py"]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true
+exclude_also = ["def fetch_minutes"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py314"
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # import sorting
+    "B",   # bugbear: likely bugs
+    "UP",  # modern Python syntax
+    "SIM", # simplifications
+    "PD",  # pandas idioms
+    "NPY", # NumPy idioms
+]

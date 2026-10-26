@@ -1,0 +1,18 @@
+# Environments
+.venv/
+.env
+
+# Python build and cache
+__pycache__/
+*.egg-info/
+build/
+dist/
+
+# Tool caches and output
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Downloaded market data: Yahoo's terms do not allow redistribution.
+data/
